@@ -1,0 +1,116 @@
+package com.zycus.sd.test;
+
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
+import com.google.common.reflect.TypeToken;
+import com.zycus.ext.commons.configuration2.ConfigurationManager;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.curator.x.discovery.*;
+import org.apache.curator.x.discovery.strategies.RandomStrategy;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.Callable;
+
+/**
+ * Created by kuldeep.gupta on 8/16/2017.
+ */
+public class ServiceDiscoveryManager {
+
+    private static final Log logger = LogFactory.getLog(ServiceDiscoveryManager.class);
+    private static final String PATH = "/discovery/example";
+    private Configuration configuration;
+    private CuratorFramework client;
+    private Cache<String, ServiceProvider<Map<String, String>>> cacheInstance;
+    private ServiceDiscovery<Map<String, String>> serviceDiscovery;
+
+
+    private static final ServiceDiscoveryManager INSTANCE = new ServiceDiscoveryManager();
+
+    public static ServiceDiscoveryManager getInstance() {
+        return INSTANCE;
+    }
+
+    private ServiceDiscoveryManager() {
+        try {
+            configuration = ConfigurationManager.getConfigInstance();
+            cacheInstance = CacheBuilder.<String, ServiceProvider<Map<String, String>>>newBuilder().softValues().removalListener(new RemovalListener<String, ServiceProvider<Map<String, String>>>() {
+                public void onRemoval(RemovalNotification<String, ServiceProvider<Map<String, String>>> removalNotification) {
+                    try {
+                        removalNotification.getValue().close();
+                    } catch (IOException e) {
+                        logger.error(e.getMessage(), e);
+                    }
+                }
+            }).build();
+
+        } catch (ConfigurationException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    private void init() {
+
+        logger.debug("Creating zookeeper client for the ensemble " + configuration.getString("zk.connectString","127.0.0.1:2181"));
+        client = CuratorFrameworkFactory.newClient(configuration.getString("zk.connectString","127.0.0.1:2181"), new ExponentialBackoffRetry(1000, 3));
+        logger.debug("Starting zookeeper client..");
+        client.start();
+
+    }
+
+    public void register() throws Exception {
+
+        Map<String, String> payload = new HashMap<String, String>();
+        Configuration metadataConfig = configuration.subset("service.metadata");
+        Iterator<String> metadataKeys = metadataConfig.getKeys();
+        while (metadataKeys.hasNext()) {
+            String key = metadataKeys.next();
+            payload.put(key, metadataConfig.getString(key));
+        }
+        logger.debug("Creating instance of this service to register...");
+        ServiceInstance<Map<String, String>> thisInstance = ServiceInstance.<Map<String, String>>builder().name(configuration.getString("service.name")).address(configuration.getString("service.addr")).port(configuration.getInt("service.port")).payload(payload).build();
+
+
+        TypeToken<Map<String, String>> typeToken = new TypeToken<Map<String, String>>() {
+        };
+        logger.debug("Creating service discovery instance..");
+        ServiceDiscoveryBuilder<Map<String, String>> discoveryBuilder = (ServiceDiscoveryBuilder<Map<String, String>>) ServiceDiscoveryBuilder.builder(typeToken.getRawType());
+        serviceDiscovery = discoveryBuilder.client(client).basePath(PATH).thisInstance(thisInstance).build();
+        logger.debug("Starting service discovery..");
+        serviceDiscovery.start();
+
+    }
+
+    public ServiceInstance<Map<String, String>> getServiceInstance(String serviceName) throws Exception {
+
+        return serviceDiscovery.serviceProviderBuilder().serviceName(serviceName).providerStrategy(new RandomStrategy<Map<String, String>>()).build().getInstance();
+    }
+
+    public ServiceInstance<Map<String, String>> getServiceInstance(final String serviceName, final InstanceFilter<Map<String, String>> filter) throws Exception {
+
+        ServiceProvider cachedServiceProvider = cacheInstance.get(serviceName, new Callable<ServiceProvider<Map<String, String>>>() {
+            public ServiceProvider<Map<String, String>> call() throws Exception {
+                ServiceProvider<Map<String, String>> provider;
+                if (filter != null)
+                    provider = serviceDiscovery.serviceProviderBuilder().serviceName(serviceName).additionalFilter(filter).providerStrategy(new RandomStrategy<Map<String, String>>()).build();
+                else
+                    provider = serviceDiscovery.serviceProviderBuilder().serviceName(serviceName).providerStrategy(new RandomStrategy<Map<String, String>>()).build();
+                provider.start();
+                return provider;
+            }
+        });
+        return cachedServiceProvider.getInstance();
+
+    }
+}
