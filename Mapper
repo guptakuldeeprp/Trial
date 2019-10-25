@@ -1,0 +1,146 @@
+package com.zycus.mapper;
+
+import com.fasterxml.jackson.core.JsonPointer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.io.IOException;
+import java.util.Map;
+
+public class Mapper {
+
+
+    public void mapper(String json, Map<String, String> schemaMapping) throws IOException {n bb
+        System.out.println("Input json:");
+        System.out.println(json);
+        String srcPtr = "/k1";
+        String destPtr = "/k4/k5";
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node = mapper.readTree(json);
+        ObjectWriter writer = mapper.writer();
+        JsonNode otherNode = node.deepCopy();
+        JsonPointer ptr = JsonPointer.compile(srcPtr);
+        JsonNode ptrNode = node.at(ptr);
+        if (!ptrNode.isMissingNode()) {
+//            JsonPointer ptr = JsonPointer.compile(srcPtr);
+            ObjectNode otherObjNode = (ObjectNode) otherNode;
+            ((ObjectNode) otherNode.at(ptr.head())).remove(ptr.last().getMatchingProperty());
+            otherNode = createPath(mapper, otherObjNode, JsonPointer.compile(destPtr), ptrNode);
+//            ((ObjectNode) ((POJONode) otherNode.with("k4").with("k5")).getPojo()).put("k6", 36);
+//            ObjectNode newNode = mapper.createObjectNode()
+//                    .put("k6", 36);
+//            newNode = mapper.createObjectNode().putPOJO("k5", newNode);
+//            otherObjNode.putPOJO("k4", newNode);
+
+        } else {
+            System.out.println("Node " + srcPtr + " does not exist");
+        }
+        String output = mapper.writer().withDefaultPrettyPrinter().writeValueAsString(otherNode);
+        System.out.println("Output json:");
+        System.out.println(output);
+
+    }
+
+    public static ObjectNode createPath(ObjectMapper objectMapper, ObjectNode node, JsonPointer jsonPointer, JsonNode valNode) throws JsonProcessingException {
+        node = createPath(objectMapper, node, jsonPointer);
+        ((ObjectNode) node.at(jsonPointer.head())).set(jsonPointer.last().toString().substring(1), valNode);
+        return node;
+    }
+
+    public static ObjectNode createPath(ObjectMapper objectMapper, ObjectNode node, JsonPointer jsonPointer) throws JsonProcessingException {
+        createPath_(objectMapper, node, jsonPointer);
+        return node;
+    }
+
+    public static ObjectNode createPath_(ObjectMapper objectMapper, ObjectNode node, JsonPointer jsonPointer) throws JsonProcessingException {
+        if (jsonPointer == null && jsonPointer.matches())
+            return node;
+        if (jsonPointer.tail().matches()) {
+            String fieldName = jsonPointer.last().toString().substring(1);
+            if (node.path(fieldName).isMissingNode())
+                return node.putObject(fieldName);
+            return node.with(fieldName);
+        } else {
+            node = createPath_(objectMapper, node, jsonPointer.head());
+            String fieldName = jsonPointer.last().toString().substring(1);
+            if (node.path(fieldName).isMissingNode())
+                return node.putObject(fieldName);
+            return node.with(fieldName);
+        }
+    }
+
+    public static ObjectNode createChildren(ObjectMapper mapper, ObjectNode node, String jsonPtrStr) throws JsonProcessingException {
+        System.out.println("jsonPtrStr: " + jsonPtrStr);
+        if (jsonPtrStr != null && !jsonPtrStr.trim().equals("")) {
+            JsonPointer ptr = JsonPointer.compile(jsonPtrStr);
+            if (ptr.tail().matches()) {
+                return node.putPOJO(ptr.last().toString().substring(1), mapper.createObjectNode());
+            } else {
+                JsonPointer first = first(ptr);
+                ObjectNode parent = createChildren(mapper, node.deepCopy(), JsonPointer.compile(jsonPtrStr).tail().toString());
+                return node.putPOJO(first.toString().substring(1), parent);
+            }
+
+        } else
+            return node;
+    }
+
+    public static JsonPointer first(JsonPointer pointer) {
+        if (pointer.matches())
+            return null;
+        if (pointer.head().matches())
+            return pointer;
+        return first(pointer.head());
+
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        String json = "{\n" +
+                "        \"k1\": {\n" +
+                "           \"k2\": 36\n" +
+                "        },\n" +
+                "        \"name\": \"text1\",\n" +
+                "        \"hOffset\": 250\n" +
+                "    }";
+
+        Mapper mapper = new Mapper();
+        mapper.mapper(json, null);
+
+
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        ObjectNode ipnode = objectMapper.createObjectNode();
+//        ipnode.putObject("a").putObject("d").putObject("d");
+//        ObjectNode node = createPath(objectMapper, ipnode, JsonPointer.compile("/a/b/c"));
+//
+//        String output = objectMapper.writer().withDefaultPrettyPrinter().writeValueAsString(node);
+//        System.out.println("output: " + output);
+//
+//        System.out.println("Parsing output back to json node to check for validity");
+//        JsonNode jsonNode = objectMapper.readTree(output);
+//        System.out.println("Parsed successfully");
+
+//        Configuration configuration = Configuration.builder()
+//                .jsonProvider(new JacksonJsonNodeJsonProvider()).mappingProvider(new JacksonMappingProvider()).build();
+
+//        String op = JsonPath.using(configuration).parse(json).set("$.k4.k5.k6", 5).jsonString();
+//        System.out.println(op);
+    }
+
+
+//    public static ObjectNode nodes(ObjectMapper mapper, String jsonPtrStr) {
+//        if (jsonPtrStr != null) {
+//            JsonPointer ptr = JsonPointer.compile(jsonPtrStr);
+//            if (ptr.matches()) {
+//                return mapper.createObjectNode();
+//            } else
+//                return mapper.putPOJO(ptr.last().toString(), nodes(mapper, JsonPointer.compile(jsonPtrStr).tail().toString()));
+//
+//        }
+//    }
+
+
+}
