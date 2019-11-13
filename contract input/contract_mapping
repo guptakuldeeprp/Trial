@@ -1,0 +1,521 @@
+input : 
+{
+  "IntegrationEntities": {
+    "integrationEntity": [
+      {
+        "integrationEntityHeader": {
+          "integrationTrackingNumber": "3603#99f4a968-d4d8-4979-8815-a5f2d2d1402b#b70001fe-f44b-4530-b014-f6896789cd30#1571155587137",
+          "referenceCodeForEntity": "Z100677",
+          "attachments": {
+            "attachment": [
+              {
+                "id": "1565637972834",
+                "name": "Z100677.pdf",
+                "size": 152285
+              },
+              {
+                "id": "1566389652270",
+                "name": "ClickThrough.pdf",
+                "size": 446640
+              },
+              {
+                "id": "1565637968112241",
+                "name": "Test Contract for Integration Testing.pdf",
+                "size": 228024
+              }
+            ]
+          }
+        },
+        "integrationEntityDetails": {
+          "contract": {
+            "contractId": "8a2180dc6c40e612016c874b7efe19ce",
+            "externalId": "",
+            "isAmendment": "No",
+            "createdOn": "2019-08-13",
+            "updatedOn": "2019-08-23",
+            "byPassAuthoringReview": "YES",
+            "byPassNegotiateCycle": "YES",
+            "contractSource": "iContract",
+            "contractModule": "Repository",
+            "contractHeaders": {
+              "type": "Procurement",
+              "subType": "Professional Services Agreement",
+              "status": "Active",
+              "contractNumber": "Z100677",
+              "contractTitle": "Test 2",
+              "contractOwner": "JeffreyLamka@alliantenergy.com",
+              "hierarchyStatus": "Master Agreement",
+              "folder": "Internal",
+              "region": "US",
+              "contractCategory": "Construction and Maintenance",
+              "contractScannedCopy": "Z100677.pdf",
+              "contractAuthoringCopy": "",
+              "contractStartDate": "2019-08-08",
+              "autoRenew": "No",
+              "contractExpirationDate": "2020-08-07",
+              "contractRenewalDate": "",
+              "contractValue": "1000.00",
+              "baseCurrency": "USD"
+            },
+            "contractDetails": {
+              "metaDataFields": {
+                "metaDataField": [
+                  {
+                    "fieldName": "IS_ARCHIVED",
+                    "fieldValue": "0"
+                  },
+                  {
+                    "fieldName": "Legacy_Contract_Number",
+                    "fieldValue": ""
+                  },
+                  {
+                    "fieldName": "Contract_Description",
+                    "fieldValue": "Test Contract"
+                  },
+                  {
+                    "fieldName": "Alliant_Vendor_ID",
+                    "fieldValue": "0000019845"
+                  },
+                  {
+                    "fieldName": "Standard_Agreement",
+                    "fieldValue": "No"
+                  },
+                  {
+                    "fieldName": "Legal_Entity",
+                    "fieldValue": "Wisconsin Power and Light Company (WP&L)"
+                  },
+                  {
+                    "fieldName": "Have_YouUpdatedTotalValue",
+                    "fieldValue": "No"
+                  },
+                  {
+                    "fieldName": "PAYMENT_TERMS",
+                    "fieldValue": "Net 45 Days"
+                  },
+                  {
+                    "fieldName": "Contract_SetID",
+                    "fieldValue": "BOTH"
+                  },
+                  {
+                    "fieldName": "Share_Portion",
+                    "fieldValue": "900.00"
+                  },
+                  {
+                    "fieldName": "Genco_Portion",
+                    "fieldValue": "100.00"
+                  },
+                  {
+                    "fieldName": "ECRMFunctionalArea",
+                    "fieldValue": "Compliance"
+                  },
+                  {
+                    "fieldName": "ECRM_Category",
+                    "fieldValue": "General Agreements LR-01"
+                  },
+                  {
+                    "fieldName": "Contract_Status",
+                    "fieldValue": "Active"
+                  },
+                  {
+                    "fieldName": "ConfidentialContract",
+                    "fieldValue": "No"
+                  },
+                  {
+                    "fieldName": "SearchableContract",
+                    "fieldValue": "Yes"
+                  },
+                  {
+                    "fieldName": "TIMEZONE",
+                    "fieldValue": "CST - (GMT-6:00)"
+                  },
+                  {
+                    "fieldName": "AUTO_RENEWAL_NOTICE_DAYS",
+                    "fieldValue": "0"
+                  },
+                  {
+                    "fieldName": "AUTO_RENEWAL_PERIOD_MONTHS",
+                    "fieldValue": "0"
+                  },
+                  {
+                    "fieldName": "AUTO_RENEWAL_MAXIMUM_NUMBER_OF_RENEWALS",
+                    "fieldValue": "0"
+                  },
+                  {
+                    "fieldName": "MASTER_ID",
+                    "fieldValue": ""
+                  },
+                  {
+                    "fieldName": "STAGE_NAME",
+                    "fieldValue": "REPO"
+                  },
+                  {
+                    "fieldName": "CREATED_FROM",
+                    "fieldValue": "2"
+                  },
+                  {
+                    "fieldName": "IS_CHECKED_OUT",
+                    "fieldValue": "NO"
+                  },
+                  {
+                    "fieldName": "CHECKED_OUT_BY",
+                    "fieldValue": ""
+                  },
+                  {
+                    "fieldName": "FROM_AUTHO_OR_REPO",
+                    "fieldValue": "2"
+                  },
+                  {
+                    "fieldName": "IS_ESIGNATURE_ENABLE",
+                    "fieldValue": "NO"
+                  }
+                ]
+              },
+              "customEntities": {}
+            },
+            "amendmentDetails": {
+              "amendmentNo": "",
+              "amendmentEffectiveDate": "",
+              "amendmentDescription": ""
+            },
+            "businessUnits": {},
+            "contractOutline": {
+              "templateType": "EXTERNAL"
+            },
+            "lineItems": {
+              "lineItem": [
+                {
+                  "itemNumber": "1",
+                  "description": "Blue Pen",
+                  "unitsOfMeasurement": "EA",
+                  "quantity": "5.00",
+                  "category": "SHARE00064",
+                  "priceType": "Unit",
+                  "currency": "USD",
+                  "cost": "3.00",
+                  "customFields": {
+                    "customField": [
+                      {
+                        "customFieldName": "Line Item Set ID (GENCO or SHARE only) test",
+                        "customFieldValue": ""
+                      }
+                    ]
+                  },
+                  "lineItemId": "8a2180dc6c9e86ed016cb422cb5e0055"
+                },
+                {
+                  "itemNumber": "2",
+                  "description": "Green Crayon",
+                  "unitsOfMeasurement": "EA",
+                  "quantity": "90.00",
+                  "category": "SHARE00064",
+                  "priceType": "Unit",
+                  "currency": "USD",
+                  "cost": "0.90",
+                  "pricingType": {
+                    "type": "Firm Fixed Price (FFP)",
+                    "fixedPrice": "10.00"
+                  },
+                  "lineItemId": "8a2180dc6c9e86ed016cba8a9604008d"
+                }
+              ]
+            },
+            "contractingParties": {
+              "primaryContractingParty": {
+                "primaryContractingPartyId": "1209434",
+                "primaryContractingPartyName": "UAT1",
+                "contactPersonId": "622868"
+              },
+              "otherContractingParties": {}
+            },
+            "amendments": {
+              "amendmentId": []
+            },
+            "utilization": {
+              "utilizationAmount": "0.0",
+              "percentUtilization": "0.0"
+            },
+            "documents": {
+              "document": [
+                {
+                  "documentDbId": "216e9150-c66b-40a9-b306-aeea06debd57",
+                  "documentId": "1566389652270",
+                  "documentType": "ContractualDoc",
+                  "documentName": "ClickThrough",
+                  "documentComments": "rgergergerg",
+                  "documentFields": {
+                    "documentField": [
+                      {
+                        "documentFieldName": "ContractDocumentType",
+                        "documentFieldValue": "Other Supporting Document"
+                      },
+                      {
+                        "documentFieldName": "Contract_Document_Uploaded_On",
+                        "documentFieldValue": "2019-08-21 00:00:00.0"
+                      },
+                      {
+                        "documentFieldName": "Contract_Document_Uploaded_By",
+                        "documentFieldValue": "JeffreyLamka@alliantenergy.com"
+                      },
+                      {
+                        "documentFieldName": "Contract_Document_Document_Upload",
+                        "documentFieldValue": "ClickThrough.pdf"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "documentDbId": "53124a3a-cf76-4a70-b89d-3083f5eef7f2",
+                  "documentId": "1565637968112241",
+                  "documentType": "ContractualDoc",
+                  "documentName": "Test Contract for Integration Testing",
+                  "documentComments": "",
+                  "documentFields": {
+                    "documentField": [
+                      {
+                        "documentFieldName": "ContractDocumentType",
+                        "documentFieldValue": "Other Supporting Document"
+                      },
+                      {
+                        "documentFieldName": "Contract_Document_Uploaded_On",
+                        "documentFieldValue": "2019-08-13 00:00:00.0"
+                      },
+                      {
+                        "documentFieldName": "Contract_Document_Uploaded_By",
+                        "documentFieldValue": "JeffreyLamka@alliantenergy.com"
+                      },
+                      {
+                        "documentFieldName": "Contract_Document_Document_Upload",
+                        "documentFieldValue": "Test Contract for Integration Testing.pdf"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "alertsReminders": {},
+            "linkedEntities": {
+              "linkedContracts": {
+                "parentContract": {},
+                "childContracts": {
+                  "childContract": [
+                    {
+                      "childContractDetails": {
+                        "childContractId": "8ab4849a5ee1cc78015ef354295f5bb0",
+                        "childContractNumber": "Z100609",
+                        "childContractTitle": "Test 10/06/2017",
+                        "childContractStatus": "Expired",
+                        "childContractOwner": "JeffreyLamka@alliantenergy.com",
+                        "childContractHierarchy": "Sub Agreement"
+                      }
+                    }
+                  ]
+                }
+              },
+              "otherLinkedEntities": {}
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+
+
+===============================================================================================
+
+output:
+[
+  {
+    "ZY_PROCUREMENT_CNTRCT": {
+      "integrationEntityHeader": {		//IntegrationEntities/integrationEntity/integrationEntityHeader/
+        "attachments": [				//copy whole as it is//IntegrationEntities/integrationEntity/integrationEntityHeader/attachments
+          {
+            "attachment": [
+              {
+                "id": "1565637972834",
+                "name": "Z100677.pdf",
+                "size": 152285
+              },
+              {
+                "id": "1566389652270",
+                "name": "ClickThrough.pdf",
+                "size": 446640
+              },
+              {
+                "id": "1565637968112241",
+                "name": "Test Contract for Integration Testing.pdf",
+                "size": 228024
+              }
+            ]
+          }
+        ],
+        "integrationTrackingNumber": [		//IntegrationEntities/integrationEntity/integrationEntityHeader/integrationTrackingNumber
+          "3603#99f4a968-d4d8-4979-8815-a5f2d2d1402b#b70001fe-f44b-4530-b014-f6896789cd30#1571155587137"
+        ],
+        "referenceCodeForEntity": [			//IntegrationEntities/integrationEntity/integrationEntityHeader/referenceCodeForEntity
+          "Z100677"
+        ],
+        "entity": "CONTRACT",				"hardcoded for now"
+        "action": null,                     "hardcoded for now"
+        "source": "ICONTRACT",              "hardcoded for now"
+        "timestampUTC": 1573556008323       "hardcoded for now"
+      },
+      "FieldTypes": {
+        "ZY_CNTRCT_HDR": {
+          "CNTRCT_ID": "",
+          "CONTRACT_SETID": "",
+          "VERSION_NBR": "",
+          "VENDOR_ID": "",
+          "CNTRCT_STATUS": "",
+          "CNTRCT_TYPE": "",
+          "DESCR": "",
+          "CNTRCT_BEGIN_DT": "",
+          "CNTRCT_EXPIRE_DT": "",
+          "CURRENCY_CD": "",
+          "ORIGIN": "",
+          "MSTR_CNTRCT_ID": "",
+          "ENTERED_DT": "",
+          "OPRID_ENTERED_BY": "",
+          "GROSS_AMT": "",
+          "BUYER_ID": "",
+          "ZY_CONTRACT_NUM": "",
+          "ZY_SUPPLIERID": "",
+          "MAINCONTRACT": "",
+          "ZY_TYPE": "",
+          "CONTRACTING_PARTY_NAME": ""
+        }
+      },
+      "MsgData": {
+        "Transaction": {
+          "ZY_CNTRCT_HDR": {
+            "CNTRCT_ID": [			//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractNumber
+              "Z100677"
+            ],
+            "CNTRCT_STATUS": "A",		// if the value is "Active" change it to "A"//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/status
+            "CNTRCT_TYPE": [				//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/subType
+              "Professional Services Agreement"		
+            ],
+            "DESCR": [								//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractTitle
+              "Test 2"
+            ],
+            "CNTRCT_BEGIN_DT": [			//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractStartDate
+              "2019-08-08"
+            ],
+            "CNTRCT_EXPIRE_DT": [			//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractExpirationDate
+              "2020-08-07"
+            ],
+            "CURRENCY_CD": [				//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/baseCurrency
+              "USD"
+            ],
+            "ENTERED_DT": [					//IntegrationEntities/integrationEntity/integrationEntityDetails/createdOn
+              "2019-08-13"
+            ],
+            "OPRID_ENTERED_BY": [			//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractOwner
+              "JeffreyLamka@alliantenergy.com"
+            ],
+            "GROSS_AMT": [					//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractValue
+              "1000.00"
+            ],
+            "BUYER_ID": [					//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractOwner
+              "JeffreyLamka@alliantenergy.com"
+            ],
+            "CS_PARENT_EMAIL": [			//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractOwner
+              "JeffreyLamka@alliantenergy.com"
+            ],
+            "ZY_CONTRACT_NUM": [			//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractId
+              "8a2180dc6c40e612016c874b7efe19ce"
+            ],
+            "ORIGIN": "ZYR",				//Pass ZYR for Repository,ZYA for Authoring//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractModule
+            "metadatafields": {				//every child are custom field mapped from path//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractDetails/metaDataFields/metaDataField
+              "IS_ARCHIVED": "0",
+              "Legacy_Contract_Number": "",
+              "Contract_Description": "TestContract",
+              "Alliant_Vendor_ID": "0000019845",
+              "Standard_Agreement": "No",
+              "Legal_Entity": "WisconsinPowerandLightCompanyWP&L",
+              "Have_YouUpdatedTotalValue": "No",
+              "PAYMENT_TERMS": "Net45Days",
+              "Contract_SetID": "BOTH",
+              "Share_Portion": "900.00",
+              "Genco_Portion": "100.00",
+              "ECRMFunctionalArea": "Compliance",
+              "ECRM_Category": "GeneralAgreementsLR-01",
+              "Contract_Status": "Active",
+              "ConfidentialContract": "No",
+              "SearchableContract": "Yes",
+              "TIMEZONE": "CST-GMT-6:00",
+              "AUTO_RENEWAL_NOTICE_DAYS": "0",
+              "AUTO_RENEWAL_PERIOD_MONTHS": "0",
+              "AUTO_RENEWAL_MAXIMUM_NUMBER_OF_RENEWALS": "0",
+              "MASTER_ID": "",
+              "STAGE_NAME": "REPO",
+              "CREATED_FROM": "2",
+              "IS_CHECKED_OUT": "NO",
+              "CHECKED_OUT_BY": "",
+              "FROM_AUTHO_OR_REPO": "2",
+              "IS_ESIGNATURE_ENABLE": "NO"
+            },
+            "CONTRACTING_PARTY_NAME": [			//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractDetails/contractingParties/primaryContractingParty/primaryContractingPartyName
+              "UAT1"
+            ],
+            "ZY_TYPE": [					//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/type
+              "Procurement"
+            ],
+            "ZY_SUPPLIERID": [				//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractDetails/contractingParties/primaryContractingParty/primaryContractingPartyId
+              "1209434"
+            ],
+            "MAINCONTRACT": null			//mapping not identified //comment: Send Base64 content of the main contract using internalDocumentId to Download Attachment API
+          },
+          "ZY_CNTRCT_LNS": {
+            "ZY_CNTRCT_LINE": [
+              {
+                "CNTRCT_ID": [				//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/contractHeaders/contractNumber
+                  "Z100677"
+                ],
+                "CNTRCT_LINE_NBR": "1",		//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/itemNumber
+                "INV_ITEM_ID": "8a2180dc6c9e86ed016cb422cb5e0055",		//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/lineItemId
+                "DESCR254_MIXED": "Blue Pen",		//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/description
+                "CATEGORY_ID": "SHARE00064",		//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/category
+                "QTY_LINE_MIN": "5.00",				//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/quantity
+                "LINE_PRICE_TYPE": "Unit",          //IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/priceType
+                "UNIT_OF_MEASURE": "EA",            //IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/unitsOfMeasurement
+                "UNIT_PRICE": "3.00",               //IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/cost
+                "CURRENCY_CD": "USD",               //IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/currency
+                "ITEM_SETID": {                     
+                  "LineItemSetIDGENCOorSHAREonlytest": ""		//custom field and remove space and () //IntegrationEntities/integrationEntity/integrationEntityDetails/contract/lineItems/lineItem/customFields/customField
+                }
+              },
+              {
+                "CNTRCT_ID": [
+                  "Z100677"
+                ],
+                "CNTRCT_LINE_NBR": "2",
+                "INV_ITEM_ID": "8a2180dc6c9e86ed016cba8a9604008d",
+                "DESCR254_MIXED": "Green Crayon",
+                "CATEGORY_ID": "SHARE00064",
+                "QTY_LINE_MIN": "90.00",
+                "LINE_PRICE_TYPE": "Unit",
+                "UNIT_OF_MEASURE": "EA",
+                "UNIT_PRICE": "0.90",
+                "CURRENCY_CD": "USD",
+                "ITEM_SETID": [
+
+                ]
+              }
+            ]
+          },
+          "CS_CT_AJDS": {
+            "CS_CT_AJD": [
+              {
+                "amendmentId": [		//IntegrationEntities/integrationEntity/integrationEntityDetails/contract/amendments/amendment
+
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+]
