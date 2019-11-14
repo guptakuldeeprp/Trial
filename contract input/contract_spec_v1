@@ -1,0 +1,97 @@
+[
+  // Test from Jolt Issue 98 : Question two from andrewkcarter
+  // Summary : Filter the "book object" by their availability type.
+  // In particular we just want Paperback books.
+  {
+    "operation": "shift",
+    "spec": {
+      "IntegrationEntities": {
+        // loop thru all the elements books array
+        "integrationEntity": {
+          "*": {
+            // if the value in the array is "paperback"
+            // grab the whole "book object" and write it out to
+            // a PaperBooks array.
+            // The "@3" means go up the tree 4 levels and grab what is there
+            // 4 levels up cause "real" programmers count from 0  ;)
+            "integrationEntityHeader": {
+              "attachments": "ZY_PROCUREMENT_CNTRCT.integrationEntityHeader.attachments[]",
+              "integrationTrackingNumber": "ZY_PROCUREMENT_CNTRCT.integrationEntityHeader.integrationTrackingNumber[]",
+              "referenceCodeForEntity": "ZY_PROCUREMENT_CNTRCT.integrationEntityHeader.referenceCodeForEntity[]"
+            },
+            "integrationEntityDetails": {
+              "contract": {
+                "contractHeaders": {
+                  "contractNumber": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.CNTRCT_ID[]",
+                  "subType": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.CNTRCT_TYPE[]",
+                  "contractTitle": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.DESCR[]",
+                  "contractStartDate": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.CNTRCT_BEGIN_DT[]",
+                  "contractExpirationDate": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.CNTRCT_EXPIRE_DT[]",
+                  "baseCurrency": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.CURRENCY_CD[]",
+                  "createdOn": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.ENTERED_DT[]",
+                  "contractOwner": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.OPRID_ENTERED_BY[]",
+                  "contractValue": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.GROSS_AMT[]",
+                  "contractOwner": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.BUYER_ID[]",
+                  "contractOwner": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.CS_PARENT_EMAIL[]",
+                  "type": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.ZY_TYPE[]"
+                    //"contractNumber" : "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[].CNTRCT_ID[]"
+                },
+                "contractId": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.ZY_CONTRACT_NUM[]",
+                "contractModule": {
+                  "Repository": {
+                    "#ZYR": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.ORIGIN"
+                  },
+                  "Authoring": {
+                    "#ZYA": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.ORIGIN"
+                  }
+                },
+                "contractDetails": {
+                  "metaDataFields": {
+                    "metaDataField": {
+                      "*": {
+                        "@fieldValue": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.metadatafields.@fieldName"
+                      }
+                    }
+                  }
+                },
+                "contractingParties": {
+                  "primaryContractingParty": {
+                    "primaryContractingParty": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_HDR.ZY_SUPPLIERID[]"
+                  }
+                },
+                "lineItems": {
+                  "lineItem": {
+                    "*": {
+                      "itemNumber": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].CNTRCT_LINE_NBR",
+                      "lineItemId": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].INV_ITEM_ID",
+                      "description": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].DESCR254_MIXED",
+                      "category": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].CATEGORY_ID",
+                      "quantity": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].QTY_LINE_MIN",
+                      "priceType": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].LINE_PRICE_TYPE",
+                      "unitsOfMeasurement": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].UNIT_OF_MEASURE",
+                      "cost": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].UNIT_PRICE",
+                      "currency": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.ZY_CNTRCT_LNS.ZY_CNTRCT_LINE[#2].UNIT_PRICE.CURRENCY_CD"
+                    }
+                  }
+                },
+                "amendments": "ZY_PROCUREMENT_CNTRCT.MsgData.Transaction.CS_CT_AJDS.CS_CT_AJD[]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "default",
+    "spec": {
+      "ZY_PROCUREMENT_CNTRCT": {
+        "integrationEntityHeader": {
+          "entity": "Contract",
+          "action": null,
+          "source": "ICONTRACT"
+        }
+      }
+    }
+  }
+]
