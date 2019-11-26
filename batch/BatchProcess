@@ -1,0 +1,114 @@
+package com.zycus.db;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
+import java.util.stream.Stream;
+
+public class BatchProcess {
+
+    public static final String DRIVER_CLASS = "driverclass";
+    public static final String URL = "dburl";
+    public static final String USERNAME = "dbusername";
+    public static final String PASSWORD = "dbpassword";
+    public static final String BATCHSIZE = "dbbatchsize";
+    public static final String SLEEP = "sleep";
+    public static final String QRY = "qry";
+    public static final String ARGS_FILE = "argsfile";
+    public static final String ARG_SEPARATOR = ",";
+
+    private int batchSize;
+    private long sleep;
+    private String argsFile;
+    private long loc = 0;
+    private FileLineChunkedIterator iterator;
+
+
+    public BatchProcess(int batchSize, long sleep, String argsFile) throws IOException, SQLException {
+        this.batchSize = batchSize;
+        this.sleep = sleep;
+        this.argsFile = argsFile;
+        iterator = new FileLineChunkedIterator(new File(argsFile), batchSize);
+
+    }
+
+    public void batchProcess(Connection conn, String preparedQry) throws IOException, SQLException {
+        conn.setAutoCommit(false);
+        while (hasNext()) {
+            PreparedStatement pstmt = conn.prepareStatement(preparedQry); // should probably create just one pstmt for the program level
+            Stream<List<String>> batch = nextBatch();
+            batch.forEach(args -> {
+                for (int i = 1; i <= args.size(); i++) {
+                    try {
+                        pstmt.setString(i, args.get(i - 1));
+                        pstmt.addBatch();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e.getMessage(), e);
+                    }
+                }
+            });
+            try {
+                int[] affectedRecords = pstmt.executeBatch();
+                conn.commit();
+                System.out.println("Num of affected records: " + affectedRecords.length);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Attempting to rollback the batch..");
+                try {
+                    conn.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error in rollback.");
+                    ex.printStackTrace();
+                }
+
+            }
+            try {
+                Thread.sleep(sleep);
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted. Ignoring..");
+            }
+        }
+    }
+
+    private Stream<List<String>> nextBatch() {
+        List<String> lines = iterator.next();
+        return lines.stream().map((line) -> Arrays.asList(line.split(ARG_SEPARATOR)));
+    }
+
+    private boolean hasNext() {
+        return iterator.hasNext();
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
+        Properties properties = new Properties();
+        InputStream is = BatchProcess.class.getClassLoader().getResourceAsStream("application.properties");
+        if (is == null) {
+            System.out.println("Could not locate application.properties on classpath. Exiting..");
+            System.exit(-1);
+        }
+        properties.load(is);
+        Class.forName(properties.getProperty(DRIVER_CLASS));
+        Connection conn = DriverManager.getConnection(properties.getProperty(URL), properties.getProperty(USERNAME), properties.getProperty(PASSWORD));
+        BatchProcess batchProcess = new BatchProcess(Integer.parseInt(properties.getProperty(BATCHSIZE)), Long.parseLong(properties.getProperty(SLEEP)), properties.getProperty(ARGS_FILE));
+        batchProcess.batchProcess(conn, properties.getProperty(QRY));
+    }
+
+    public static int countCharacterOccurrence(String str, char ch) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ch) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+}
